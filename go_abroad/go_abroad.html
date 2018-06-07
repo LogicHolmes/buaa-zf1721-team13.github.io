@@ -1,0 +1,104 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Document</title>  
+    <script src="../JavaScript/echarts/echarts.min.js"></script>  
+    <script src="http://gallery.echartsjs.com/dep/echarts/map/js/world.js"></script>  
+    <style>
+        .button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 16px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                -webkit-transition-duration: 0.4s; /* Safari */
+                transition-duration: 0.4s;
+                cursor: pointer;
+                background-color: white; 
+                color: black; 
+                border: 2px solid #4CAF50;
+            }
+            .button:hover {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+
+
+    </style>
+</head>  
+<body> 
+    <div><a href="../index.html" class="button">BACK</a></div>
+     <div id="main" style="width:100%;height:800px"></div>  
+    <script>  
+     var myChart = echarts.init(document.getElementById('main'));  
+        option = {  
+    title: {  
+        
+        
+        sublink: 'http://esa.un.org/wpp/Excel-Data/population.htm',  
+        left: 'center',  
+        top: 'top'  
+    },  
+   /* tooltip: {  
+        trigger: 'item',  
+        formatter: function (params) {  
+            var value = (params.value + '').split('.');  
+            value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,')  
+                    + '.' + value[1];  
+            return params.seriesName + '<br/>' + params.name + ' : ' + value;  
+        }  
+    },*/  
+     
+    visualMap: {  
+        min: 0,  
+        max: 650,  
+        text:['High','Low'],  
+        realtime: false,  
+        calculable: true,  
+        color: ['orangered','yellow','lightskyblue']  
+    },  
+    series: [  
+        {  
+            name: 'World Population (2010)',  
+            type: 'map',  
+            mapType: 'world',  
+            roam: true,  
+            itemStyle:{  
+                emphasis:{label:{show:true}}  
+            },  
+            data:[
+				  {name: 'Australia', value: 31},
+				  {name: 'Belgium', value: 5},
+				  {name: 'Denmark', value: 5},
+				  {name: 'Germany', value: 58},
+				  {name: 'Russia', value: 3},
+				  {name: 'France', value: 24},
+				  {name: 'Finland', value: 4},
+				  {name: 'South Korea', value: 7},
+				  {name: 'Netherlands', value: 6},
+				  {name: 'Canada', value: 48},
+				  {name: 'United States', value: 648},
+				  {name: 'Japan', value: 33},
+				  {name: 'Sweden', value: 15},
+				  {name: 'Switzerland', value: 13},
+				  {name: 'Saudi Arabia', value: 1},
+				  {name: 'Spain', value: 3},
+				  {name: 'Singapore', value: 41},
+				  {name: 'Italy', value: 2},
+				  {name: 'United Kingdom', value: 75},
+				  {name: 'China', value: 222}
+            ]
+        }  
+    ]  
+};  
+ myChart.setOption(option);  
+  
+    </script>  
+</body>  
+</html> 
