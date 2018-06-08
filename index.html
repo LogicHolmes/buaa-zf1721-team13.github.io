@@ -1,145 +1,291 @@
 <!DOCTYPE html>
-<html>
-    <head>
-	
-		<style>
-            .container{                
-                width:100%;
-                height:100%;
-            }
-           
-           .left{
-                text-align:center;
-                background-color: white;                
-                float:left;
-                width: 50%;            
-           }
-           
-           .right{
-                text-align:center;
-                background-color: white;                
-                float:right;            
-                width:50%;
-           }
-        </style>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第13组高性能作业展示</title>
+<link rel="shortcut icon" href="./image/分析.png">
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="JavaScript/SheetJS/xlsx.full.min.js"></script>
+<script src="JavaScript/echarts/echarts.min.js"></script>
+<script src="JavaScript/echarts-gl/echarts-gl.min.js"></script>
 		
-		<style>
-            .container2{                
-                width:100%;
-                height:100%;
-            }
-           
-           .left2{
-                text-align:center;
-                background-color: white;
-                width:100%;
-           }
-           
-           .right2{
-                text-align:center;
-                background-color: white;
-                float:right;
-                width:100%;
-           }
-           a:link{
-					text-decoration:none;
-					color: white;
-					}
-			a:visited{
-					text-decoration:none;
-					color: white;
-					}
-			a:hover{
-				color:#404040;
-			}
-			a:active{
-					text-decoration:none;
-					}
-			span{
-				color:#0099FF;
-			}
-        </style>
-	
-        <meta charset="UTF-8">
-        <title></title>
-		
-        <script src="JavaScript/SheetJS/xlsx.full.min.js"></script>
-		<script src="JavaScript/echarts/echarts.min.js"></script>
-		<script src="JavaScript/echarts-gl/echarts-gl.min.js"></script>
-		
-		<script src="JavaScript/echarts/bmap.min.js"></script>
-		<script src="JavaScript/jquery-3.3.1.min.js"></script>
-		<script src="JavaScript/require.js"></script>
-		<script src="https://api.map.baidu.com/api?v=2.0&ak=sY4SVxUV9vSRulv0bWY1KMOX53a7dPU1"></script>
-        <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-		
-    </head>
+<script src="JavaScript/echarts/bmap.min.js"></script>
+<script src="JavaScript/jquery-3.3.1.min.js"></script>
+<script src="JavaScript/require.js"></script>
+<script src="https://api.map.baidu.com/api?v=2.0&ak=sY4SVxUV9vSRulv0bWY1KMOX53a7dPU1"></script>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script src="http://gallery.echartsjs.com/dep/echarts/map/js/world.js"></script>  
 
-    <body>
+</head>
+<style>
 
-		<!-- 基于百度Echarts和百度地图 -->
-	
-		<div class="container2" background="image/map.jpg">
-            <div id="mapOrigin" class="left2" style=" height:800px;">
-            </div>
-            <div class="right2" style="height:50px"><a href="#abroad"><span>NEXT</span></a></div>
-			<div id = "abroad" class="right2" style="height:300px;font-size:48px;border: 2px solid 	#C0C0C0;background:url(./image/map_1.jpg);" background="./image/map.jpg"><p style="font-size:80px;font-family:微软雅黑,serif;color: white"><a href="go_abroad/go_abroad.html" >千人计划海外留学分布</a></p></div>
+</style>
+<body>
 
-        </div> 	
+<div id="wrapper">
+	<div class="overlay"></div>
 
+	<!-- Sidebar -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+		<ul class="nav sidebar-nav">
+			<li class="sidebar-brand">
+				<a href="#">
+				   千人计划调研
+				</a>
+			</li>
+			<li>
+				<a id="home" href="#container"><i class="fa fa-fw fa-home"></i> Home</a>
+			</li>
+			<li>
+				<a id="a_0" href="#"><i class="fa fa-fw fa-birthday-cake"></i>年龄性别和出生年月</a>
+			</li>
+			<li>
+				<a id="a_1"href="#"><i class="fa fa-fw fa-map-marker"></i>籍贯分布图</a>
+			</li>
+			<li>
+				<a id="a_2" href="#"><i class="fa fa-fw fa-cog"></i>学科分布统计</a>
+			</li>
+            <li>
+				<a id="a_3" href="#"><i class="fa fa-fw fa-map"></i>留学分析</a>
+			</li>
+			<li>
+				<a id="a_4"href="#"><i class="fa fa-fw fa-ellipsis-h"></i> 其他</a>
+			</li>
+		</ul>
+	</nav>
+	<!-- /#sidebar-wrapper -->
 
-
+	<!-- Page Content -->
+	<div id="page-content-wrapper">
+	  <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+		<span class="hamb-top"></span>
+		<span class="hamb-middle"></span>
+		<span class="hamb-bottom"></span>
+	  </button>
 		<div class="container">
-            <div class="left" id="img_1" style=" height:600px;">
-                <h1>籍贯与落地省份对比</h1>
-                <img src="./image/jiguan_luodi.png" alt="籍贯与落地省份对比" width="85%" height="60%"/>
-                <div height="30%"><p></p></div>
-            </div>
-            <div class="right" id="agePie" style=" height:600px;">       
-                <h1>本省与外省对比</h1>
-                <img src="./image/bensheng_waisheng.png" alt="本省与外省对比" width="85%" height="60%"/>
-                <div height="30%"><p></p></div>
-            </div>
-            <div class="right2" style="height:50px"><a href="#mapOrigin"><span>BACK</span></a>&nbsp;&nbsp;&nbsp;<a href="#img_2"><span>NEXT</span></a></div>
-        </div> 
-        <div class="container">
-            <div class="right2" style="height:50px"><a href="#ageLine"></a></div>
-            <div class="left" id="img_2" style=" height:600px;">
-                <h1>人员比例</h1>
-                <img src="./image/renyuanbili.png" alt="人员比例" width="85%" height="60%"/>
-                <div height="30%"><p></p></div>
-            </div>
-            <div class="right" id="agePie" style=" height:600px;">       
-                <h1>本科院校</h1>
-                <img src="./image/benke.png" alt="本科院校" width="85%" height="60%"/>
-                <div height="30%"><p></p></div>
-            </div>
-            <div class="right2" style="height:50px"><a href="#abroad"><span>BACK</span></a>&nbsp;&nbsp;&nbsp;<a href="#img_2">NEXT</a></div>
-        </div> 
+			<div id="out_row" style="height:800px; overflow: hidden; background-color: #d9ecfa;padding: 20px 30px;border: solid 5px #9fb8c7;">
+                <div id="Home" style="height:800px;">
+                    <h1 style="font-size:50px;text-align:center;color:#000000">“千人计划”人物探索性数据分析</h1>
+                    <h1 style="font-size:50px;text-align:center;color:#000000">第十三组</h1>
+                    <div style="text-align:center;padding-top:50px;font-family:MicroSoft YaHei;font-size:32px;color:#000000">
+                        <ul style="list-style-type:none">
+                            <li>组长</li>
+                            <li>刘子晗 ZF1721245</li>
+                            <li>  </li>
+                            <li>小组成员</li>
+                            <li>冯清华 ZF1721131</li>
+                            <li>李鑫 ZF1721225</li>
+                            <li>殷晓婷 ZF1721406</li>
+                            <li>蔡晨毅 ZF1721104</li>
+                        </ul>
+                    </div>
+                </div>
+				<div id="1_page">
+                    <div style="background-color:#e8eff7 ">
+                        <div id="row" style="height:400px">
+                            <div style="height:95%;width:49%;background-color: #ffffff;border: solid 1px #9fb8c7;float: left">
+                                <div id="born_year" style="height:400px;"></div>
+                            </div>
+                            <div style="height:95%;width:49%;background-color: #e8eff7;border: solid 1px #9fb8c7;float: right">
+                                <img src="./image/gender.jpg" alt="性别图" style="width:100%;height:100%" />
+                            </div>
+                        </div>
+                        <div style="background-color:#ffffff;border:solid 1px #9fb8c7;">
+                            <div id="born_month" style="height:350px;"></div>
+                        </div>
+                    </div>
+                        
+            	</div>
+                
+                <div id ="map" >
+                    <div id="mapOrigin" style="border: solid 1px #9fb8c7;"></div>
+                </div>
+                <div id ="xueke" >
+                    <div style="background-color:#e8eff7 ">
+                        <div id="row" style="height:300px">
+                            <div style="height:95%;width:49%;background-color: #ffffff;border: solid 1px #9fb8c7;float: left">
+                                <img src="./image/CH.png" alt="获得称号时间" style="width:100%;height:100%" />
+                            </div>
+                            <div style="height:95%;width:49%;background-color: #ffffff;border: solid 1px #9fb8c7;float: right">
+                                <img src="./image/paper.jpg" alt="论文数量图" style="width:90%;height:100%" />
+                            </div>
+                        </div>
+                        <div style="background-color:#ffffff;border:solid 1px #9fb8c7;">
+                            <div id="container_1" style="height:400px;"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div id ="go_abord" >
+                    <div style="background-color:#e8eff7 ">
+                                                <h3 style="color:#000000;text-align:center">部分千人计划留学分布图</h3>
+                        <div style="background-color:#ffffff;border:solid 1px #9fb8c7;">
 
-        <script>
-        $(function(){  
-            //锚点跳转滑动效果  
-            $('a[href*=#],area[href*=#]').click(function() {  
-                console.log(this.pathname)  
-                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {  
-                    var $target = $(this.hash);  
-                    $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');  
-                    if ($target.length) {  
-                        var targetOffset = $target.offset().top;  
-                        $('html,body').animate({  
-                                    scrollTop: targetOffset  
-                                },  
-                                1000);  
-                        return false;  
-                    }  
-                }  
-            });  
-        })  
-		
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
-			// 获取容器
+                            <iframe src="./go_abroad/go_abroad.html" style="height:700px;width:100%"> </iframe>
+                        </div>
+                    </div>
+                </div>
+                <div id="other">
+                    <div style="background-color:#e8eff7 ">
+                        <div id="row" style="height:380px">
+                            <div style="height:95%;width:49%;background-color: #ffffff;border: solid 1px #9fb8c7;float: left">
+                                <div style="height:30px;"><h4 style="text-align:center;color:#000000;">籍贯与本科所在地对比</h4></div>
+                               <img src="./image/benke.png" alt="本科图" style="width:100%;height:315px;" />
+                            </div>
+                            <div style="height:95%;width:49%;background-color: #ffffff;border: solid 1px #9fb8c7;float: right">
+                                <div style="height:30px;"><h4 style="text-align:center;color:#000000;">落地省份在本省与外省对比</h4></div>
+                                <img src="./image/bensheng_waisheng.png" alt="本省与外省" style="width:100%;height:315px" />
+                            </div>
+                        </div>
+                         <div id="row" style="height:380px">
+                            <div style="height:95%;width:49%;background-color: #ffffff;border: solid 1px #9fb8c7;float: left">
+                                <div style="height:30px;"><h4 style="text-align:center;color:#000000;">籍贯与落地对比</h4></div>
+                                <img src="./image/jiguan_luodi.png" alt="籍贯和落地" style="width:100%;height:315px" />
+                            </div>
+                            <div style="height:95%;width:49%;background-color: #ffffff;border: solid 1px #9fb8c7;float: right">
+                                 <div style="height:30px;"><h4 style="text-align:center;color:#000000;">各地千人是当地人的比例</h4></div>
+                                <img src="./image/renyuanbili.png" alt="人员比例" style="width:100%;height:315px" />
+                            </div>
+                        </div>
+                    </div>
+                        
+            	</div>
+
+
+                
+            </div>
+		</div>
+	</div>
+</div>
+	<!-- /#page-content-wrapper -->
+<!-- /#wrapper -->
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/bootstrap-3.3.4.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+	  var trigger = $('.hamburger'),
+		  overlay = $('.overlay'),
+		 isClosed = false;
+
+		trigger.click(function () {
+		  hamburger_cross();      
+		});
+
+		function hamburger_cross() {
+
+		  if (isClosed == true) {          
+			overlay.hide();
+			trigger.removeClass('is-open');
+			trigger.addClass('is-closed');
+			isClosed = false;
+		  } else {   
+			overlay.show();
+			trigger.removeClass('is-closed');
+			trigger.addClass('is-open');
+			isClosed = true;
+		  }
+	  }
+	  
+	  $('[data-toggle="offcanvas"]').click(function () {
+			$('#wrapper').toggleClass('toggled');
+	  });  
+	});
+</script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var mydata = { '110': { name: '数学', num: 13 },
+  '140': { name: '物理学', num: 28 },
+  '150': { name: '化学工程', num: 5 },
+  '170': { name: '地球科学', num: 5 },
+  '180': { name: '生物学', num: 32 },
+  '310': { name: '基础医学', num: 4 },
+  '320': { name: '临床医学', num: 1 },
+  '330': { name: '预防医学与卫生学', num: 3 },
+  '350': { name: '药学', num: 1 },
+  '430': { name: '材料科学', num: 10 },
+  '460': { name: '机械工程', num: 12 },
+  '470': { name: '动力与电气工程', num: 8 },
+  '480': { name: '能源科学技术', num: 1 },
+  '510': { name: '电子、通信与自动控制技术', num: 16 },
+  '520': { name: '计算机科学技术', num: 9 },
+  '530': { name: '化学工程', num: 2 },
+  '550': { name: '食品科学技术', num: 1 },
+  '560': { name: '土木建筑工程', num: 2 },
+  '580': { name: '交通运输工程', num: 2 },
+  '610': { name: '环境科学技术', num: 3 },
+  '790': { name: '经济学', num: 4 },
+  '840': { name: '社会学', num: 4 },
+  '910': { name: '统计学', num: 1 } }
+
+var nameArray = []
+var numArray = []
+for (var Key in mydata){
+    nameArray.push(mydata[Key].name)
+    numArray.push(mydata[Key].num)
+}
+var dom = document.getElementById("container_1");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    title:{
+        text:"学科人数分布",
+        left:'center',
+        textStyle:{
+            fontSize:22
+        }
+    },
+    xAxis: {
+        type: 'category',
+        data: nameArray,
+        name:'二级学科',
+        axisLabel:{  
+            interval:0,//横轴信息全部显示  
+            rotate:-30,//-30度角倾斜显示  
+        }, 
+    },
+    yAxis: {
+        type: 'value',
+        name:'人数', 
+
+        nameTextStyle:{
+            fontStyle:'oblique',
+            fontSize:18
+        }
+    },
+    series: [{
+        data: numArray,
+        type: 'bar',
+        label:{
+            normal:{
+                show:true,            //显示数字
+                position: 'top',        //这里可以自己选择位置
+                textStyle: {
+                    color: 'black'
+                }
+            }
+        }
+    }],
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+<script type="text/javascript">
 			var mapOriginContainer = document.getElementById('mapOrigin');
 			// var linContainer = document.getElementById('ageLine');
 			// var pieContainer = document.getElementById('agePie');
@@ -147,7 +293,8 @@
 			// 用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 			var resizeWorldMapContainer = function () {
 				// mapUnitContainer.style.height = (parseInt(window.innerHeight) - 50).toString()+'px';
-				mapOriginContainer.style.height = (parseInt(window.innerHeight) - 50).toString()+'px';
+				//mapOriginContainer.style.height = (parseInt(window.innerHeight) - 50).toString()+'px';
+				mapOriginContainer.style.height = '600px';
 				//linContainer.style.height = (parseInt(window.innerHeight) - 50).toString()+'px';
 				//pieContainer.style.height = (parseInt(window.innerHeight) - 50).toString()+'px';
 			};
@@ -201,7 +348,8 @@
 				}],
 				bmap: {
 					center: [104.114129, 37.550339],
-					zoom: winWidth / 1920 * 8,//5.5,
+					// zoom: winWidth / 1920,//5.5,
+                    zoom:winWidth/1920 *8,
 					roam: true,
 					mapStyle: {
 						styleJson: [{
@@ -344,5 +492,283 @@
 			bmapOriginGeo.addControl(new BMap.MapTypeControl());
 			
         </script>
-    </body>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。</p>
+<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
+</div>
+<script>
+var aButton_0= document.getElementById('a_0');
+var aButton_1=document.getElementById('a_1');
+var aButton_2=document.getElementById('a_2');
+var aButton_3=document.getElementById('a_3');
+var aButton_4=document.getElementById('a_4');
+var home=document.getElementById('home');
+var aButton = [aButton_0,aButton_1,aButton_2,aButton_3,aButton_4,home];
+var aDiv_0 = document.getElementById("1_page");
+var aDiv_1 = document.getElementById('map');
+var aDiv_2 = document.getElementById('xueke');
+var aDiv_3 = document.getElementById('go_abord');
+var aDiv_4 = document.getElementById('other');
+var Home = document.getElementById('Home');
+
+var aDiv =[aDiv_0,aDiv_1,aDiv_2,aDiv_3,aDiv_4,Home]
+//给每一个button都添加点击事件
+for (var i = 0; i < aButton.length; i++) {
+//通过给button自定义属性来解决
+aButton[i].index=i;//每个键存储一下
+aButton[i].onclick = function () {
+//点击事件的实现？？  this就是点击的button
+for (var j = 0; j < aButton.length; j++) {
+aDiv[j].className = 'hide';
+}
+//再给应该添加的对象添加className
+aDiv[this.index].className = 'show';
+};
+}
+</script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('born_year'));
+option = {
+
+    title : {
+
+        text: '千人计划年龄分布',
+
+        subtext: '数据来自网络'
+
+    },
+
+    tooltip : {
+
+        trigger: 'axis'
+
+    },
+
+    legend: {
+
+        data:['数据']
+
+    },
+
+    toolbox: {
+
+        show : true,
+
+        feature : {
+
+            mark : {show: true},
+
+            dataView : {show: true, readOnly: false},
+
+            magicType: {show: true, type: ['line', 'bar']},
+
+            restore : {show: true},
+
+            saveAsImage : {show: true}
+
+        }
+
+    },
+
+    calculable : true,
+
+    xAxis : [
+
+		        {
+
+            type : 'category',
+			axisLabel:{  
+            interval:0,//横轴信息全部显示  
+            rotate:-30,//-30度角倾斜显示  
+			}, 
+
+            data : ["1946","1947","1954","1955","1956","1957","1958","1959","1960","1961","1962","1963","1964","1965","1966","1968","1969","1975"]
+
+        }
+    ],
+
+    yAxis : [
+
+
+        {
+
+            type : 'value',
+
+            boundaryGap : [0, 0.01]
+
+        }
+
+
+    ],
+
+    series : [
+        {
+            name:'数据',
+            type:'bar',
+            data:[1,2,1,4,1,6,4,4,7,5,16,17,7,4,2,5,2,1]
+        }
+    ]
+
+};
+        // 使用刚指定的配置项和数据显示图表。
+ myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('born_month'));
+option = {
+
+    title : {
+
+        text: '千人计划出生月份分布',
+
+        subtext: '数据来自网络'
+
+    },
+
+    tooltip : {
+
+        trigger: 'axis'
+
+    },
+
+    legend: {
+
+        data:['第二批数据', '第三批数据','第四批数据', '总数据']
+
+    },
+
+    toolbox: {
+
+        show : true,
+
+        feature : {
+
+            mark : {show: true},
+
+            dataView : {show: true, readOnly: false},
+
+            magicType: {show: true, type: ['line','bar']},
+
+            restore : {show: true},
+
+            saveAsImage : {show: true}
+
+        }
+
+    },
+
+    calculable : true,
+
+    xAxis : [
+
+		        {
+
+            type : 'category',
+
+            data : ["Jan","Feb","March","April","May","June","July","Aug","Sep","Oct","Nev","Dec"]
+
+        }
+    ],
+
+    yAxis : [
+
+
+        {
+
+            type : 'value',
+
+            boundaryGap : [0, 0.01]
+
+        }
+
+
+    ],
+
+    series : [
+        {
+            name:'第二批数据',
+            type:'line',
+            data:[8,17,9,14,14,12,11,21,14,17,22,19]
+        },
+        {
+            name:'第三批数据',
+            type:'line',
+            data:[21,13,17,12,12,16,14,20,13,32,22,29]
+        },
+		{
+			name: '第四批数据',
+			type: 'line',
+			data: [13,10,7,12,14,8,13,18,24,27,16,21]
+        },
+		{
+			name: '总数据',
+			type: 'line',
+			data: [42,40,33,38,40,36,38,59,51,76,60,69]
+        }
+
+    ]
+
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    
+    <script>  
+     var myChart = echarts.init(document.getElementById('go-abord'));  
+        option = {  
+    title: {          
+        sublink: 'http://esa.un.org/wpp/Excel-Data/population.htm',  
+        left: 'center',  
+        top: 'top'  
+    },  
+    
+    visualMap: {  
+        min: 0,  
+        max: 650,  
+        text:['High','Low'],  
+        realtime: false,  
+        calculable: true,  
+        color: ['orangered','yellow','lightskyblue']  
+    },  
+    series: [  
+        {  
+            name: 'World Population (2010)',  
+            type: 'map',  
+            mapType: 'world',  
+            roam: true,  
+            itemStyle:{  
+                emphasis:{label:{show:true}}  
+            },  
+            data:[
+				  {name: 'Australia', value: 31},
+				  {name: 'Belgium', value: 5},
+				  {name: 'Denmark', value: 5},
+				  {name: 'Germany', value: 58},
+				  {name: 'Russia', value: 3},
+				  {name: 'France', value: 24},
+				  {name: 'Finland', value: 4},
+				  {name: 'South Korea', value: 7},
+				  {name: 'Netherlands', value: 6},
+				  {name: 'Canada', value: 48},
+				  {name: 'United States', value: 648},
+				  {name: 'Japan', value: 33},
+				  {name: 'Sweden', value: 15},
+				  {name: 'Switzerland', value: 13},
+				  {name: 'Saudi Arabia', value: 1},
+				  {name: 'Spain', value: 3},
+				  {name: 'Singapore', value: 41},
+				  {name: 'Italy', value: 2},
+				  {name: 'United Kingdom', value: 75},
+				  {name: 'China', value: 222}
+            ]
+        }  
+    ]  
+};  
+ myChart.setOption(option);  
+  
+    </script>
+</body>
 </html>
